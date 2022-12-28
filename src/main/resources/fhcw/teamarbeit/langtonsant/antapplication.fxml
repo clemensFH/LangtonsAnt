@@ -41,7 +41,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="btnStart" mnemonicParsing="false" prefWidth="46.0" text="Start">
+                  <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startAnt" prefWidth="46.0" text="Start">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>

@@ -46,11 +46,11 @@ public class Ant {
                 stepSouth();
             }
         }
-        try {
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     private void stepNorth(){
