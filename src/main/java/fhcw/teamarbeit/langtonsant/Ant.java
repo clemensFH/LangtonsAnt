@@ -21,7 +21,7 @@ public class Ant {
         boolean white = grid.getGrid()[x][y].getWhite();
         grid.getGrid()[x][y].setWhite(!white);
         if (white){
-            grid.getGrid()[x][y].setFill(Paint.valueOf("darkgrey"));
+            grid.getGrid()[x][y].setFill(Paint.valueOf("grey"));
             if(this.direction == Direction.NORTH){
                 stepEast();
             } else if(this.direction == Direction.SOUTH){
@@ -50,21 +50,49 @@ public class Ant {
 
     private void stepNorth(){
         this.y--;
+        if(this.y == this.grid.getDimension()){
+            this.y = 0;
+        }else if(this.y == -1){
+            this.y = this.grid.getDimension()-1;
+        }
         this.direction = Direction.NORTH;
     }
 
     private void stepSouth(){
         this.y++;
+        if(this.y == this.grid.getDimension()){
+            this.y = 0;
+        }else if(this.y == -1){
+            this.y = this.grid.getDimension()-1;
+        }
         this.direction = Direction.SOUTH;
     }
 
     private void stepEast(){
         this.x++;
+        if(this.x == this.grid.getDimension()){
+            this.x = 0;
+        }else if(this.x == -1){
+            this.x = this.grid.getDimension()-1;
+        }
         this.direction = Direction.EAST;
     }
 
     private void stepWest(){
         this.x--;
+        if(this.x == this.grid.getDimension()){
+            this.x = 0;
+        }else if(this.x == -1){
+            this.x = this.grid.getDimension()-1;
+        }
         this.direction = Direction.WEST;
+    }
+
+    private void checkIfBorderCrossed(int axis){
+        if(axis == this.grid.getDimension()){
+            axis = 0;
+        }else if(axis == -1){
+            axis = this.grid.getDimension()-1;
+        }
     }
 }

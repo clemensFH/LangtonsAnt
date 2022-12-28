@@ -7,12 +7,14 @@ import java.util.List;
 
 public class Grid {
     private Cell[][] grid;
+    private int dimension;
 
     public Grid(Group group, int dimension) {
-        this.grid = new Cell[dimension][dimension];
+        this.dimension = dimension;
+        this.grid = new Cell[this.dimension][this.dimension];
         List<Cell> cells = new ArrayList<>();
-        for(int i=0; i<dimension; i++){
-            for(int j=0; j<dimension; j++){
+        for(int i=0; i<this.dimension; i++){
+            for(int j=0; j<this.dimension; j++){
                 cells.add(new Cell(i,j));
             }
         }
@@ -22,5 +24,9 @@ public class Grid {
 
     public Cell[][] getGrid() {
         return grid;
+    }
+
+    public int getDimension() {
+        return dimension;
     }
 }

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
@@ -15,7 +16,7 @@
       <Group fx:id="cells" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <VBox prefHeight="99.0" prefWidth="700.0" BorderPane.alignment="CENTER" stylesheets="/fhcw/teamarbeit/langtonsant/style.css">
+      <VBox prefHeight="99.0" prefWidth="700.0" stylesheets="/fhcw/teamarbeit/langtonsant/style.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
                <children>
@@ -46,12 +47,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnStop" mnemonicParsing="false" prefWidth="46.0" text="Stop">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnReset" mnemonicParsing="false" prefWidth="46.0" text="Reset" />
+                  <Button fx:id="btnReset" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Create" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
@@ -61,7 +57,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Slider fx:id="sliderSpeed" />
+                  <Slider fx:id="speed" max="100" min="1" value="1" />
                   <Label text="Steps">
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -72,6 +68,11 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </TextField>
+                  <Hyperlink fx:id="link" text="How does Langtons Ant work?">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Hyperlink>
                </children>
             </HBox>
          </children>
