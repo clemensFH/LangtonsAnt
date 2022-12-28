@@ -15,7 +15,7 @@
       <Group fx:id="cells" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <VBox prefHeight="99.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="99.0" prefWidth="700.0" BorderPane.alignment="CENTER" stylesheets="/fhcw/teamarbeit/langtonsant/style.css">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
                <children>
@@ -24,19 +24,19 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtfldDim" prefHeight="26.0" prefWidth="70.0" text="100">
+                  <TextField fx:id="txtfldDim" prefHeight="26.0" prefWidth="70.0" text="20">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </TextField>
                   <Label text="Start-X" />
-                  <TextField fx:id="txtfldX" prefHeight="26.0" prefWidth="70.0" text="25">
+                  <TextField fx:id="txtfldX" prefHeight="26.0" prefWidth="70.0" text="10">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </TextField>
                   <Label text="Start-Y" />
-                  <TextField fx:id="txtfldY" prefWidth="70.0" text="25">
+                  <TextField fx:id="txtfldY" prefWidth="70.0" text="10">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

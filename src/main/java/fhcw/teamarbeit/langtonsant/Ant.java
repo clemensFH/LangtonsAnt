@@ -14,11 +14,10 @@ public class Ant {
         this.x = x;
         this.y = y;
         this.grid = grid;
-        this.direction = Direction.NORTH;
+        this.direction = Direction.WEST;
     }
 
     public void move(){
-        grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
         boolean white = grid.getGrid()[x][y].getWhite();
         grid.getGrid()[x][y].setWhite(!white);
         if (white){
@@ -30,7 +29,7 @@ public class Ant {
             } else if(this.direction == Direction.EAST){
                 stepSouth();
             } else if(this.direction == Direction.WEST){
-                stepEast();
+                stepNorth();
             }
 
         }
@@ -46,11 +45,7 @@ public class Ant {
                 stepSouth();
             }
         }
-        /*try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }*/
+        grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
     }
 
     private void stepNorth(){

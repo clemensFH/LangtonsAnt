@@ -65,6 +65,7 @@ public class AntController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
 //        btnStart.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
 //            public void handle(ActionEvent actionEvent) {
@@ -109,14 +110,7 @@ public class AntController implements Initializable {
         btnStop.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                grid.getGrid()[5][5].setFill(Paint.valueOf("red"));
-
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                grid.getGrid()[5][5].setFill(Paint.valueOf("yellow"));
+               timeline.stop();
             }
         });
     }
@@ -126,7 +120,7 @@ public class AntController implements Initializable {
         int x = Integer.parseInt(txtfldX.getText());
         int y = Integer.parseInt(txtfldY.getText());
         grid = new Grid(cells, dimension);
-        grid.getGrid()[x][y].setFill(Paint.valueOf("Black"));
+        grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
         ant = new Ant(x,y,grid);
         timeline = new Timeline();
         timeline.setCycleCount(Animation.INDEFINITE);
