@@ -47,7 +47,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnReset" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Create" />
+                  <Button fx:id="btnCreateReset" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Create" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">

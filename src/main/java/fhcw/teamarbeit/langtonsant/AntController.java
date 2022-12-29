@@ -3,7 +3,6 @@ package fhcw.teamarbeit.langtonsant;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +22,7 @@ public class AntController implements Initializable {
     private BorderPane borderpane;
 
     @FXML
-    private Button btnReset;
+    private Button btnCreateReset;
 
     @FXML
     private Button btnStart;
@@ -55,9 +54,6 @@ public class AntController implements Initializable {
 
     private Timeline timeline;
 
-    private boolean run;
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -66,22 +62,42 @@ public class AntController implements Initializable {
 
         });
 
-        btnReset.setOnAction(new EventHandler<ActionEvent>() {
+        btnCreateReset.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(btnReset.getText().equals("Reset")) {
-                    btnReset.setText("Create");
-                    cells.getChildren().clear();
-                }else if(btnReset.getText().equals("Create")){
-                    btnReset.setText("Reset");
-                    int dimension = Integer.parseInt(txtfldDim.getText());
-                    int x = Integer.parseInt(txtfldX.getText());
-                    int y = Integer.parseInt(txtfldY.getText());
-                    grid = new Grid(cells, dimension);
-                    if(inDimension(x) && inDimension(y)){
-                        grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
-                        ant = new Ant(x,y,grid);
+                if(btnCreateReset.getText().equals("Reset")) {
+                    btnCreateReset.setText("Create");
+                    if(btnStart.getText().equals("Stop")){
+                        timeline.stop();
+                        btnStart.setText("Start");
                     }
+                    setInputAccess(true);
+                    cells.getChildren().clear();
+                }else if(btnCreateReset.getText().equals("Create")){
+                    int dimension = 0, x, y;
+                    try {
+                        dimension = Integer.parseInt(txtfldDim.getText());
+                        x = Integer.parseInt(txtfldX.getText());
+                        y = Integer.parseInt(txtfldY.getText());
+                    }catch (NumberFormatException ex){
+                        raiseErrorMessage("Bitte geben Sie eine Zahl ein!");
+                        return;
+                    }
+                    if(dimension < 1){
+                        raiseErrorMessage("Dimension muss mind. 1 sein!");
+                        return;
+                    }
+                    if(!inDimension(x, dimension) || !inDimension(y, dimension)){
+                        raiseErrorMessage("Startkoordinaten müssen innerhalb der Dimension sein!" + System.lineSeparator()
+                                + "0 - " + (dimension -1));
+                        return;
+                    }
+
+                    grid = new Grid(cells, dimension);
+                    grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
+                    ant = new Ant(x,y,grid);
+                    setInputAccess(false);
+                    btnCreateReset.setText("Reset");
                 }
             }
         });
@@ -99,7 +115,6 @@ public class AntController implements Initializable {
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), this::tick));
             timeline.rateProperty().bind(speed.valueProperty());
-            timeline.setOnFinished(ev -> txtfldDim.setText("Start"));
             timeline.play();
         } else if (btnStart.getText().equals("Stop")) {
             btnStart.setText("Start");
@@ -111,15 +126,23 @@ public class AntController implements Initializable {
         ant.move();
     }
 
-    private boolean inDimension(int z){
-        if(z < 0 || z >= this.grid.getDimension()){
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setHeaderText("Ungültige Eingabe");
-            errorAlert.setContentText("Startkoordinaten müssen innerhalb der Dimension sein!" + System.lineSeparator()
-                                        + "0 - " + (this.grid.getDimension()-1));
-            errorAlert.showAndWait();
+    private boolean inDimension(int z, int d){
+        if(z < 0 || z >= d){
             return false;
         }
         return true;
+    }
+
+    private void raiseErrorMessage(String message) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setHeaderText("Ungültige Eingabe");
+        errorAlert.setContentText(message);
+        errorAlert.showAndWait();
+    }
+
+    private void setInputAccess(boolean value) {
+        txtfldDim.setEditable(value);
+        txtfldY.setEditable(value);
+        txtfldX.setEditable(value);
     }
 }
