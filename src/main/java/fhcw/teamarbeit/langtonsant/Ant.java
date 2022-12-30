@@ -3,6 +3,7 @@ package fhcw.teamarbeit.langtonsant;
 import javafx.scene.paint.Paint;
 
 public class Ant {
+  //hey ich bins
 
     private int x;
     private int y;
