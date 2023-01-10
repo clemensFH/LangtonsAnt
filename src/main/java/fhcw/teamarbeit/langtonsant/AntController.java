@@ -8,11 +8,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,7 +65,11 @@ public class AntController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         link.setOnAction(event -> {
-
+            try {
+                Desktop.getDesktop().browse(new URI("https://en.wikipedia.org/wiki/Langton%27s_ant"));
+            } catch (IOException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         btnCreateReset.setOnAction(new EventHandler<ActionEvent>() {
@@ -121,7 +131,6 @@ public class AntController implements Initializable {
             timeline.stop();
         }
     }
-
     private void tick(ActionEvent actionEvent) {
         ant.move();
     }
