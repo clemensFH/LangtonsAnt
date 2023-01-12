@@ -17,8 +17,7 @@ public class AntApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AntApplication.class.getResource("antapplication.fxml"));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 700, 700);
-        scene.setFill(Color.web("#81c483"));
+        Scene scene = new Scene(root);
         stage.setTitle("Langtons Ant Simulation");
         stage.setScene(scene);
         stage.setResizable(false);

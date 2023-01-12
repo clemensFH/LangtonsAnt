@@ -9,6 +9,8 @@ public class Ant {
     private int y;
     private Grid grid;
 
+    private int steps, count;
+
     private Direction direction;
 
     public Ant(int x, int y, Grid grid) {
@@ -16,11 +18,28 @@ public class Ant {
         this.y = y;
         this.grid = grid;
         this.direction = Direction.WEST;
+        this.steps = 10;
+        this.count = 0;
+    }
+
+    public Ant(int x, int y, Grid grid, int steps) {
+        this.x = x;
+        this.y = y;
+        this.grid = grid;
+        this.direction = Direction.WEST;
+        this.steps = steps;
+        this.count = 0;
     }
 
     public void move(){
+//        if(count == steps){
+//            return;
+//        }
+//        count++;
+
         boolean white = grid.getGrid()[x][y].getWhite();
         grid.getGrid()[x][y].setWhite(!white);
+
         if (white){
             grid.getGrid()[x][y].setFill(Paint.valueOf("grey"));
             if(this.direction == Direction.NORTH){
@@ -32,7 +51,6 @@ public class Ant {
             } else if(this.direction == Direction.WEST){
                 stepNorth();
             }
-
         }
         else{
             grid.getGrid()[x][y].setFill(Paint.valueOf("white"));

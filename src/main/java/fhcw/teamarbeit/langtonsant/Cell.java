@@ -24,10 +24,7 @@ public class Cell extends Rectangle {
         this.white = true;
     }
 
-    public int x() {
-
-        return x;
-    }
+    public int x() {return x;}
 
     public boolean getWhite() {
         return white;

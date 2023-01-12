@@ -31,7 +31,7 @@ public class AntController implements Initializable {
     private Button btnCreateReset;
 
     @FXML
-    private Button btnStart;
+    private Button btnStartStop;
 
     @FXML
     private Group cells;
@@ -77,9 +77,9 @@ public class AntController implements Initializable {
             public void handle(ActionEvent event) {
                 if(btnCreateReset.getText().equals("Reset")) {
                     btnCreateReset.setText("Create");
-                    if(btnStart.getText().equals("Stop")){
+                    if(btnStartStop.getText().equals("Stop")){
                         timeline.stop();
-                        btnStart.setText("Start");
+                        btnStartStop.setText("Start");
                     }
                     setInputAccess(true);
                     cells.getChildren().clear();
@@ -119,15 +119,15 @@ public class AntController implements Initializable {
             return;
         }
 
-        if (btnStart.getText().equals("Start")) {
-            btnStart.setText("Stop");
+        if (btnStartStop.getText().equals("Start")) {
+            btnStartStop.setText("Stop");
             timeline = new Timeline();
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), this::tick));
             timeline.rateProperty().bind(speed.valueProperty());
             timeline.play();
-        } else if (btnStart.getText().equals("Stop")) {
-            btnStart.setText("Start");
+        } else if (btnStartStop.getText().equals("Stop")) {
+            btnStartStop.setText("Start");
             timeline.stop();
         }
     }
@@ -136,10 +136,7 @@ public class AntController implements Initializable {
     }
 
     private boolean inDimension(int z, int d){
-        if(z < 0 || z >= d){
-            return false;
-        }
-        return true;
+        return z >= 0 && z < d;
     }
 
     private void raiseErrorMessage(String message) {
