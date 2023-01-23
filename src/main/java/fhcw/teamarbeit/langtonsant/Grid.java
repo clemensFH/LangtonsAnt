@@ -15,14 +15,16 @@ public class Grid {
     public Grid(Group group, int dimension) {
         this.dimension = dimension;
         this.grid = new Cell[this.dimension][this.dimension];
-        List<Cell> cells = new ArrayList<>();
+
+        // Zu jedem Feld im Grid wird eine Cell erstellt an den entsprechenden Koordinaten
+        // Die Cells werden auch der Group hinzugefügt, um sie im GUI anzuzeigen
         for(int i=0; i<this.dimension; i++){
             for(int j=0; j<this.dimension; j++){
-                cells.add(new Cell(i,j));
+                Cell current = new Cell(i,j);
+                grid[current.x()][current.y()] = current;
+                group.getChildren().add(current);
             }
         }
-        cells.forEach(cell -> grid[cell.x()][cell.y()] = cell);
-        group.getChildren().addAll(cells);
     }
 
     /* Getters */

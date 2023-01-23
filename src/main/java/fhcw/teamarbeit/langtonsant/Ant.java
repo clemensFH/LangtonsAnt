@@ -17,10 +17,7 @@ import javafx.scene.paint.Paint;
  *  */
 public class Ant {
     private enum Direction {
-        NORTH,
-        SOUTH,
-        EAST,
-        WEST
+        NORTH, SOUTH, EAST, WEST
     }
     private int x;
     private int y;
