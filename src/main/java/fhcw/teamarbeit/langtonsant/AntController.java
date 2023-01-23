@@ -108,6 +108,7 @@ public class AntController implements Initializable {
                         return;
                     }
 
+
                     grid = new Grid(cells, dimension);
                     grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
                     ant = new Ant(x,y,grid, steps);
