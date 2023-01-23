@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AntApplication extends Application {
+
+    /* Die für Initialisierung des Fensters und Komponenten zustängige Methode*/
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AntApplication.class.getResource("antapplication.fxml"));
@@ -24,6 +26,8 @@ public class AntApplication extends Application {
         stage.getIcons().add(new Image("file:src/main/resources/fhcw/teamarbeit/langtonsant/antLogo.png"));
         stage.show();
     }
+
+    /** Das ist die Main Methode, von der die Programm gestartet wird */
     public static void main(String[] args) {
         launch();
     }
