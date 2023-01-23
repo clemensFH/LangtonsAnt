@@ -46,8 +46,8 @@ public class Ant {
         count++;
 
         // Feldwert holen und gleich darauf ändern
-        boolean clockwise = grid.getGrid()[x][y].getWhite();
-        grid.getGrid()[x][y].setWhite(!clockwise);
+        boolean clockwise = grid.getGrid()[x][y].getClockwise();
+        grid.getGrid()[x][y].setClockwise(!clockwise);
 
         if (clockwise){ // Ameise beweget sich im Uhrzeigersinn
             grid.getGrid()[x][y].setFill(Paint.valueOf("grey"));

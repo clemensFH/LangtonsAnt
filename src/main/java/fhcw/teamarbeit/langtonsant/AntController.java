@@ -72,9 +72,13 @@ public class AntController implements Initializable {
             }
         });
 
+        /**
+         * Ber Button btnCreateReset wechselt in seiner Funktion zum Erstellen und Zurücksetzen
+         */
         btnCreateReset.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                // aktuelles Feld und Ant werden beendet
                 if(btnCreateReset.getText().equals("Reset")) {
                     btnCreateReset.setText("Create");
                     if(btnStartStop.getText().equals("Stop")){
@@ -83,7 +87,8 @@ public class AntController implements Initializable {
                     }
                     setInputAccess(true);
                     cells.getChildren().clear();
-                }else if(btnCreateReset.getText().equals("Create")){
+                } // neues Feld und Ant werden erstellt
+                else if(btnCreateReset.getText().equals("Create")){
                     int dimension = 0, x, y;
                     try {
                         dimension = Integer.parseInt(txtfldDim.getText());
@@ -173,10 +178,7 @@ public class AntController implements Initializable {
             return 0;
         }
 
-        if(steps == 0){
-            raiseErrorMessage("Steps muss mind. 1 sein!");
-            return 0;
-        } else if(steps < 0){ // falls negative Zahl eingegeben wurde (ACHTUNG: nicht -1 Code!!!)
+        if(steps <= 0){ // falls NACH dem Einlesen 0 oder negative Zahl eingegeben wurde (ACHTUNG: nicht -1 Code!!!)
             raiseErrorMessage("Steps muss mind. 1 sein!");
             return 0;
         }
