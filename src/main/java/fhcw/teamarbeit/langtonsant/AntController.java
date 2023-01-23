@@ -103,9 +103,14 @@ public class AntController implements Initializable {
                         return;
                     }
 
+                    int steps = readSteps();
+                    if (steps == 0){ // 0 als Code für ungültige Eingabe
+                        return;
+                    }
+
                     grid = new Grid(cells, dimension);
                     grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
-                    ant = new Ant(x,y,grid);
+                    ant = new Ant(x,y,grid, steps);
                     setInputAccess(false);
                     btnCreateReset.setText("Reset");
                 }
@@ -150,5 +155,31 @@ public class AntController implements Initializable {
         txtfldDim.setEditable(value);
         txtfldY.setEditable(value);
         txtfldX.setEditable(value);
+        txtfldSteps.setEditable(value);
+    }
+
+    private int readSteps(){
+        int steps = -1;
+        String stepInput = txtfldSteps.getText();
+        if(stepInput.equals("")){ // -1 als Code für kein Input in diesem Feld -> Ameise läuft unendlich
+            return steps;
+        }
+
+        try {
+            steps = Integer.parseInt(stepInput);
+        }catch (NumberFormatException ex){
+            raiseErrorMessage("Bitte geben Sie eine Zahl ein!");
+            return 0;
+        }
+
+        if(steps == 0){
+            raiseErrorMessage("Steps muss mind. 1 sein!");
+            return 0;
+        } else if(steps < 0){ // falls negative Zahl eingegeben wurde (ACHTUNG: nicht -1 Code!!!)
+            raiseErrorMessage("Steps muss mind. 1 sein!");
+            return 0;
+        }
+
+        return steps;
     }
 }

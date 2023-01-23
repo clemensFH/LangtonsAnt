@@ -13,15 +13,6 @@ public class Ant {
 
     private Direction direction;
 
-    public Ant(int x, int y, Grid grid) {
-        this.x = x;
-        this.y = y;
-        this.grid = grid;
-        this.direction = Direction.WEST;
-        this.steps = 10;
-        this.count = 0;
-    }
-
     public Ant(int x, int y, Grid grid, int steps) {
         this.x = x;
         this.y = y;
@@ -32,10 +23,11 @@ public class Ant {
     }
 
     public void move(){
-//        if(count == steps){
-//            return;
-//        }
-//        count++;
+        // wenn steps -1 ist, ist keine max. Anzahl an Schritten gesetzt
+        if(count == steps){
+            return;
+        }
+        count++;
 
         boolean white = grid.getGrid()[x][y].getWhite();
         grid.getGrid()[x][y].setWhite(!white);
