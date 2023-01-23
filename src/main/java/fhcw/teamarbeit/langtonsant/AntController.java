@@ -93,8 +93,8 @@ public class AntController implements Initializable {
                         raiseErrorMessage("Bitte geben Sie eine Zahl ein!");
                         return;
                     }
-                    if(dimension < 1){
-                        raiseErrorMessage("Dimension muss mind. 1 sein!");
+                    if(dimension < 1 || dimension > 75){
+                        raiseErrorMessage("Dimension muss zwischen 1 und 75 liegen!");
                         return;
                     }
                     if(!inDimension(x, dimension) || !inDimension(y, dimension)){

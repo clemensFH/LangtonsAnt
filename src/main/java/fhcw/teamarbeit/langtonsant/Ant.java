@@ -2,14 +2,32 @@ package fhcw.teamarbeit.langtonsant;
 
 import javafx.scene.paint.Paint;
 
+/**
+ * Die Klasse Ant repräsentiert die Ameise auf dem Feld/Grid.
+ *
+ * x,y speichern die Positionskoordinaten am Grid.
+ *
+ * steps speichert die maximale Anzahl an Schritten, die durchgeführt werden soll
+ * der Wert -1 hierfür steht für unendlich (Input ist optional)
+ *
+ * mit count wird geprüft ob, der Wert in Steps erreicht wurde
+ * (bei -1 eben nie, da count von 0 aufwärts zählt)
+ *
+ * Mit dem Enum Direction wird die Richtung gespeichert, in die die Ameise gerade guckt
+ *  */
 public class Ant {
-  //hey ich bins
-
+    private enum Direction {
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST
+    }
     private int x;
     private int y;
     private Grid grid;
 
-    private int steps, count;
+    private final int steps;
+    private int count;
 
     private Direction direction;
 
@@ -23,16 +41,18 @@ public class Ant {
     }
 
     public void move(){
-        // wenn steps -1 ist, ist keine max. Anzahl an Schritten gesetzt
+        // Check ob max. Schritte erreicht wurden
+        // wenn steps -1 ist, ist keine max. Anzahl an Schritten gesetzt und die Ameise läuft unendlich lang
         if(count == steps){
             return;
         }
         count++;
 
-        boolean white = grid.getGrid()[x][y].getWhite();
-        grid.getGrid()[x][y].setWhite(!white);
+        // Feldwert holen und gleich darauf ändern
+        boolean clockwise = grid.getGrid()[x][y].getWhite();
+        grid.getGrid()[x][y].setWhite(!clockwise);
 
-        if (white){
+        if (clockwise){ // Ameise beweget sich im Uhrzeigersinn
             grid.getGrid()[x][y].setFill(Paint.valueOf("grey"));
             if(this.direction == Direction.NORTH){
                 stepEast();
@@ -44,7 +64,7 @@ public class Ant {
                 stepNorth();
             }
         }
-        else{
+        else{ // Ameise beweget sich gegen Uhrzeigersinn
             grid.getGrid()[x][y].setFill(Paint.valueOf("white"));
             if(this.direction == Direction.NORTH){
                 stepWest();
@@ -56,54 +76,43 @@ public class Ant {
                 stepSouth();
             }
         }
+
+        // Ameise im Feld markieren
         grid.getGrid()[x][y].setFill(Paint.valueOf("red"));
     }
 
     private void stepNorth(){
         this.y--;
-        if(this.y == this.grid.getDimension()){
-            this.y = 0;
-        }else if(this.y == -1){
-            this.y = this.grid.getDimension()-1;
-        }
+        this.y = keepInBorders(this.y);
         this.direction = Direction.NORTH;
     }
 
     private void stepSouth(){
         this.y++;
-        if(this.y == this.grid.getDimension()){
-            this.y = 0;
-        }else if(this.y == -1){
-            this.y = this.grid.getDimension()-1;
-        }
+        this.y = keepInBorders(this.y);
         this.direction = Direction.SOUTH;
     }
 
     private void stepEast(){
         this.x++;
-        if(this.x == this.grid.getDimension()){
-            this.x = 0;
-        }else if(this.x == -1){
-            this.x = this.grid.getDimension()-1;
-        }
+        this.x = keepInBorders(this.x);
         this.direction = Direction.EAST;
     }
 
     private void stepWest(){
         this.x--;
-        if(this.x == this.grid.getDimension()){
-            this.x = 0;
-        }else if(this.x == -1){
-            this.x = this.grid.getDimension()-1;
-        }
+        this.x = keepInBorders(this.x);
         this.direction = Direction.WEST;
     }
 
-    private void checkIfBorderCrossed(int axis){
+    private int keepInBorders(int axis) {
+        // Falls Ameise über Feldränder bewegt, auf gegenüber liegender Seite platzieren
         if(axis == this.grid.getDimension()){
-            axis = 0;
+            return 0;
         }else if(axis == -1){
-            axis = this.grid.getDimension()-1;
+            return this.grid.getDimension()-1;
         }
+        return axis;
     }
+
 }
