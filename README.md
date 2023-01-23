@@ -5,7 +5,7 @@
 - **Start** - dieser Button startet die Ameisen-[Turingmaschine](https://de.wikipedia.org/wiki/Turingmaschine).
 - **Create** - bevor du aber die Ameise mit dem Start-Button auf den Weg schicken kannst, musst du mit dem **Create** Button deine Eingaben bestätigen.
 - **Speed** - verändert die Geschwindigkeit.
-- **Steps** - 
+- **Steps** - maximale Anzahl der Schritte, die die Ameise läuft.
 
 #### Für weitere Informationen zu Langtons Ant -> im Programm dem Link folgen.
 #### - Team Machine
